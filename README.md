@@ -1,6 +1,8 @@
 # transatlantic_biodata
 This repo contains all of the code to send OpenBCI biosignals from the Processing GUI via a TCP socket to another computer via the Internet. It will first be tested by hackers at the BCI Montreal and Hack The Brain Amsterdam hackathons, that are happening simultaneously. 
 
+![image](assets/whiteboard.jpg)
+
 ## Files
 
 * **Processing/OpenBCI_GUI_EMG** — this Processing code acts as the EMG receiver and signal processor from the OpenBCI board. It also broadcasts the data over TCP to the machine running **NetBridge_Receiver**.

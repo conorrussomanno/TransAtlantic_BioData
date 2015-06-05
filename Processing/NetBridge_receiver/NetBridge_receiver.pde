@@ -7,6 +7,11 @@
  
 
 import processing.net.*;
+import processing.serial.*;  //for serial communication to Arduino & HHI Shield
+
+String netBridge_portName = "REPLACE_THIS_WITH_YOUR_SERIAL_PORT_NAME";  //must edit this based on the name of the serial/COM port your Arduino w/ HHI
+Serial netBridge_serial;
+int netBridge_baud = 9600; //baud rate from the Arduino / HHI
 
 int port = 12345;
 boolean myServerRunning = true;
@@ -22,6 +27,17 @@ void setup()
   textFont(createFont("SanSerif", 16));
   myServer = new Server(this, port); // Starts a myServer on port 10002
   background(0);
+  
+  //attempt to establish serial connection to Arduino board with HHI
+  try {
+    println("OpenBCI_GUI:  attempting to open serial port for HHI using name = " + netBridge_portName);
+    netBridge_serial = new Serial(this, netBridge_portName, netBridge_baud); //open the com port
+    netBridge_serial.clear(); // clear anything in the com port's buffer
+  } 
+  catch (RuntimeException e) {
+    println("OpenBCI_GUI: *** ERROR ***: Could not open " + netBridge_portName);
+  }
+  
 }
 
 void mousePressed()
@@ -70,22 +86,23 @@ void draw()
     text("stopped", 15, 65);
   }
 
+  // Clear background (draw it white)
   fill(255,255,255);
+  rect(0,0, width, height);  
   
-  rect(0,0, width, height);
-    
+  // draw blue with opacity proportional to strength of incoming signal  
   fill(0,0,255, (int)map(intensityFromClient, 0, 100, 0, 255));    
-  
   rect(0,0, width, height);
-    
-/*  
-  if(isActive){
-    println("a");
-    fill(0,0,255, map(intensityFromClient, 0, 100);
-  } else {
-    fill(255,255,255);
-  }
   
-  rect(0,0, width, height);
- */
+  netBridge_serial.write(intensityFromClient);  //send a value from 0-100 over the serial port to the Arduino w/ HHI shield
+  println("Value To HHI: | " + intensityFromClient + " |");
+
+//  // For BINARY ON/OFF
+//  if(isActive){
+//    println("a");
+//    fill(0,0,255, map(intensityFromClient, 0, 100);
+//  } else {
+//    fill(255,255,255);
+//  }
+//  rect(0,0, width, height);
 }
