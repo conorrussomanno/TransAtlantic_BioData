@@ -223,17 +223,15 @@ void setup() {
 
   playground = new Playground(navBarHeight);
   
-  c = new Client(this, "25.114.153.225", 12345); // Replace with your server's IP and port
+//  c = new Client(this, "25.114.153.225", 12345); // Replace with your server's IP and port
   
-//  //establish serial connection to Arduino board with HHI
-//  try {
-//    println("OpenBCI_GUI:  attempting to open serial port for  using name = " + netBridge_portName);
-//    netBridge_serial = new Serial(this, netBridge_portName, netBridge_baud); //open the com port
-//    netBridge_serial.clear(); // clear anything in the com port's buffer
-//  } 
-//  catch (RuntimeException e) {
-//    println("OpenBCI_GUI: *** ERROR ***: Could not open " + netBridge_portName);
-//  }
+  //try to connect to connect to VPN
+  try {
+    c = new Client(this, "25.114.153.225", 12345); // Replace with your server's IP and port
+  } 
+  catch (RuntimeException e) {
+    println("Failed to connect to VPN... make sure that it is running: " + e);
+  }
   
 }
 //====================== END--OF ==========================//
