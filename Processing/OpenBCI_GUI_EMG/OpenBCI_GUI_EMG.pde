@@ -799,11 +799,11 @@ void serialEvent(Serial port) {
 
       fileoutput.writeRawData_dataPacket(dataPacketBuff[curDataPacketInd], openBCI.get_scale_fac_uVolts_per_count(), openBCI.get_scale_fac_accel_G_per_count());
     }
-  } else if (port == inMoov_serial) {
-      //do nothing for now...
-  } else {
-    println("OpenBCI_GUI: serialEvent: received serial data NOT from OpenBCI.");
-    inByte = port.read();
+//  } else if (port == netBridge_serial) {
+//      //do nothing for now...
+//  } else {
+//    println("OpenBCI_GUI: serialEvent: received serial data NOT from OpenBCI.");
+//    inByte = port.read();
   }
 }
 
