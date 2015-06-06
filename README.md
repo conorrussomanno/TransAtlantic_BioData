@@ -31,4 +31,5 @@ This repo contains all of the code to send OpenBCI biosignals from the Processin
 5. TransAtlantic BioData Time! Set up a Skype connection and enjoy!
 
 ![image](assets/WaagDemo.jpg)
+
 *Špela Petrič, Pieter van Boheemen, Conor Russomanno and Yannick Roy transatlantic interconnected arms and brains*
