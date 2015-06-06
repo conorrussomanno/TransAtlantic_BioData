@@ -22,14 +22,14 @@ void loop() {
   if(relayState) {
   
     digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-    delay(300);              // wait for a second
-    digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-    delay(300);              // wait for a second
+    //delay(300);              // wait for a second
+    //digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
+    //delay(300);              // wait for a second
   
   }
-  //else {
-  //  digitalWrite(13, LOW);
-  //}
+  else {
+    digitalWrite(13, LOW);
+  }
   
   // Serial Commands
   while (Serial.available()>0) {
@@ -37,12 +37,12 @@ void loop() {
     if (c == '\n') {
       if(buffer.startsWith("id")) {
         Serial.print("id:H2H"); // device identifier
-      } else if (buffer.startsWith("on")) {
+      } else if (buffer.startsWith("1")) {
         relayState = true;
         
         // Report through serial
         Serial.println(F("Relay on "));
-      } else if (buffer.startsWith("off")) {
+      } else if (buffer.startsWith("0")) {
         relayState = false;
         
         // Report through serial
